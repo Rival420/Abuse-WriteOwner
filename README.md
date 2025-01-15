@@ -27,6 +27,8 @@ This tool is intended for **authorized penetration testing and red team operatio
 ### Tools
 
 - **Impacket**: Ensure the `owneredit.py` and `dacledit.py` scripts from Impacket are in the working directory.
+   - https://github.com/fortra/impacket/blob/master/examples/owneredit.py
+   - https://github.com/fortra/impacket/blob/master/examples/dacledit.py    
 - **`net`**** Command**: Pre-installed on systems like Kali Linux, accessible via PATH.
 
 ### Environment
