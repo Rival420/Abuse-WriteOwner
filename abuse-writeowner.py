@@ -85,7 +85,7 @@ def main():
         )
         run_command(cleanup_command)
 
-    print(f"{Green}[+] Process complete. Use the new password '{args.new_password} for user '{args.victim_user} for further actions.")
+    print(f"{Green}[+] Process complete. Use the new password '{args.new_password}' for user '{args.victim_user}' for further actions.")
 
 if __name__ == "__main__":
     main()
