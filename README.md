@@ -67,24 +67,12 @@ This tool is intended for **authorized penetration testing and red team operatio
 
 ```bash
 python writeowner_abuse.py \
-  --domain <domain_name> \
-  --attacker-user <attacker_username> \
-  --attacker-password <attacker_password> \
-  --victim-user <victim_username> \
-  --domain-controller <domain_controller_fqdn> \
-  --new-password <new_password>
-```
-
-### Example
-
-```bash
-python writeowner_abuse.py \
-  --domain example.local \
-  --attacker-user attacker1 \
-  --attacker-password AttackerPass123 \
-  --victim-user victim1 \
-  --domain-controller dc.example.local \
-  --new-password NewP@ssword123
+  -d <domain_name> \
+  -u <attacker_username> \
+  -p <attacker_password> \
+  -vu <victim_username> \
+  -dc <domain_controller_fqdn> \
+  -np <new_password>
 ```
 
 ### Cleanup
