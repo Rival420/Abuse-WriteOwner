@@ -27,6 +27,7 @@ def check_tools():
     for tool in required_tools:
         if not os.path.isfile(tool):
             print(f"Error: Required script {tool} not found in the current directory.")
+            print("You can download the script in the following github repo: https://github.com/fortra/impacket")
             return False
 
     # Check if 'net' binary is available in PATH
